@@ -1,0 +1,35 @@
+name: Terraform CI - validate secure Azure baseline
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.10.5"
+
+      - name: Check formatting
+        run: terraform fmt -check -recursive
+
+      - name: Initialize providers without remote state
+        run: terraform init -backend=false -input=false
+
+      - name: Validate Terraform code (no Azure deploy)
+        run: terraform validate -no-color
+
+      - name: Check Azure subnet CIDR plan
+        run: python3 scripts/validate_cidrs.py --vnet 10.42.0.0/16 --app 10.42.1.0/24 --ops 10.42.2.0/24
+
+      - name: Run Python unit tests
+        run: python3 -m unittest discover -s tests -v
