@@ -1,6 +1,8 @@
 # Secure Azure Network Automation | Terraform + GitHub Actions
 
-**Independent DevOps portfolio starter project.** This repository demonstrates an Infrastructure as Code approach to creating a small security-conscious Microsoft Azure network baseline. It is not a client project or production deployment.
+[![ Terraform CI](https://github.com/ftariq-tech/azure-secure-devops-portfolio/actions/workflows/terraform-checks.yml/badge.svg)](https://github.com/ftariq-tech/azure-secure-devops-portfolio/actions/workflows/terraform-checks.yml)
+
+**Independent Cloud & DevOps Portfolio Project.** This project demonstrates secure Azure infrastructure automation using Terraform, GitHub Actions, and Python. The CI pipeline has successfully passed Terraform validation and automated tests. Azure deployment has not yet been performed.
 
 ![Project cover](docs/portfolio-cover.png)
 
@@ -85,24 +87,27 @@ terraform destroy
 
 **Keep the state file until destroy succeeds.** Always verify resources were actually removed in the Azure portal. Do not upload `terraform.tfvars`, state, saved plans, credentials or tokens. The `.gitignore` reduces accidental publication risk but does not replace a manual review.
 
-## 4. GitHub portfolio workflow
+## CI/CD Validation Results
 
-1. Create a public repository such as `azure-secure-devops-portfolio`.
-2. Upload the **contents** of this folder (including `.github`); do not upload the ZIP as one file.
-3. Open the **Actions** tab and check the Terraform CI result.
-4. If it fails, read the error output, fix the code, then push changes.
-5. Add screenshots of *your own* successful checks and update `docs/VALIDATION_LOG.md`.
-6. Add the final repository link to your CV projects section when you understand and have validated the content.
+The project includes an automated GitHub Actions CI pipeline to validate infrastructure configurations and network security checks.
 
-## Portfolio descriptions
+**Successfully Completed:**
+- Terraform formatting validation
+- Terraform provider initialization
+- Terraform configuration validation
+- Azure subnet CIDR validation using Python
+- Automated Python unit tests
 
-- [Resume/CV entry](docs/RESUME_ENTRY.md)
-- [Future Upwork portfolio item](docs/UPWORK_PORTFOLIO.md)
-- [Verification and evidence checklist](docs/VALIDATION_LOG.md)
+**CI Pipeline Status:** Passed
 
+**Deployment Status:** Infrastructure code validated; Azure deployment not yet performed.
+
+**Technologies:** Microsoft Azure, Terraform, GitHub Actions, Python, Infrastructure as Code (IaC).
+
+[View Successful CI Pipeline](https://github.com/ftariq-tech/azure-secure-devops-portfolio/actions/runs/41326172713)
 ## Scope and limitations
 
-- Project is **starter code prepared for customization and review**; no Terraform validate, successful GitHub run or Azure deployment is claimed by default.
+-Terraform formatting, initialization, configuration validation, CIDR checks, and Python unit tests have passed successfully in GitHub Actions. Azure resources have not been deployed.
 - No storage private endpoint exists; the storage account is intentionally locked down and cannot be used for data traffic until one is added.
 - The network CIDR Python checker is a design check, **not** a substitute for IaC policy scanning or a security audit.
 - A real production implementation would add remote Terraform state, approved identities, network access design, audit logging, cost monitoring and formal security tests.
