@@ -1,0 +1,9 @@
+# COPY to terraform.tfvars only for an authorized demo subscription.
+# NEVER commit terraform.tfvars or Terraform state.
+subscription_id = "REPLACE_WITH_YOUR_OWN_SUBSCRIPTION_ID"
+location        = "eastus"
+environment     = "dev"
+project_name    = "cloudops"
+vnet_cidr       = "10.42.0.0/16"
+app_subnet_cidr = "10.42.1.0/24"
+ops_subnet_cidr = "10.42.2.0/24"

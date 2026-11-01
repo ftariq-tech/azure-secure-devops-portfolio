@@ -1,0 +1,17 @@
+digraph AzureDemo {
+    graph [bgcolor="#0B1220", pad="0.34", nodesep="0.46", ranksep="0.58", fontname="DejaVu Sans", rankdir=LR, label="Secure Azure Network Baseline  |  Terraform + GitHub Actions", labelloc=t, fontsize=19, fontcolor="#F1F5F9"];
+    node [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=12, color="#334155", penwidth=1.5, fontcolor="#F8FAFC", fillcolor="#17263B", margin="0.20,0.16"];
+    edge [color="#5EEAD4", penwidth=1.7, arrowsize=0.8];
+    github [label="GitHub Actions\nFmt  ·  Validate  ·  Python Tests", fillcolor="#20334B"];
+    terraform [label="Terraform IaC\nAzureRM Provider", fillcolor="#155E75"];
+    subgraph cluster_azure {
+      label="Microsoft Azure  |  Resource Group"; style="rounded,dashed"; fontcolor="#C9D7E5"; color="#45617B";
+      vnet [label="Virtual Network\n10.42.0.0/16", fillcolor="#1D3F53"];
+      app [label="App Subnet\n10.42.1.0/24\nNSG: Deny Internet Inbound"];
+      ops [label="Ops Subnet\n10.42.2.0/24\nNSG: Block Public SSH/RDP"];
+      storage [label="Storage Account\nNo Public Network Access\nTLS 1.2 + Entra-only Auth", fillcolor="#264653"];
+      vnet -> app; vnet -> ops;
+    }
+    github -> terraform -> vnet;
+    terraform -> storage;
+}
